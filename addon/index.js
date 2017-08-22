@@ -9,6 +9,9 @@ import PT from './langs/pt';
 import SV from './langs/sv';
 import RU from './langs/ru';
 
+import EN_STATE from './states/en';
+import FR_STATE from './states/fr';
+
 const langs = {
   "de" : DE,
   "en" : EN,
@@ -19,6 +22,11 @@ const langs = {
   "pt" : PT,
   "fi" : FI,
   "ru" : RU
+};
+
+const states = {
+  "en" : EN_STATE,
+  "fr" : FR_STATE,
 };
 
 
@@ -145,11 +153,33 @@ export function getName(code, lang) {
 }
 
 /*
+ * @param code ISO 3166-1
+ * @param lang language for country name
+ * @return name or undefined
+ */
+export function getStateName(code, lang) {
+  try {
+    const l = states[lang.toLowerCase()];
+    return l[code.toUpperCase()];
+  } catch (err) {
+    return undefined;
+  }
+}
+
+/*
  * @param lang language for country name
  * @return hash
  */
 export function getNames(lang) {
   return langs[lang.toLowerCase()] || {};
+}
+
+/*
+ * @param lang language for state name
+ * @return hash
+ */
+export function getStatesNames(lang) {
+  return states[lang.toLowerCase()] || {};
 }
 
 /*
