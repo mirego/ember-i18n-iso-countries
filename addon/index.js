@@ -205,6 +205,28 @@ export function getAlpha2Code(name, lang) {
 }
 
 /*
+ * @param name name
+ * @param lang language for country name
+ * @return ISO 3166-1 alpha-2 or undefined
+ */
+export function getStateAlpha2Code(name, lang) {
+  try {
+    let p;
+    const codenames = states[lang.toLowerCase()];
+    for (p in codenames) {
+      if (codenames.hasOwnProperty(p)) {
+        if (codenames[p].toLowerCase() === name.toLowerCase()) {
+          return p;
+        }
+      }
+    }
+    return undefined;
+  } catch (err) {
+    return undefined;
+  }
+}
+
+/*
  * @return hash (alpha-2 => alpha-3)
  */
 export function getAlpha2Codes() {
